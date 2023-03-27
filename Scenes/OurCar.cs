@@ -34,7 +34,7 @@ public partial class OurCar : CharacterBody2D
 
 		var motion = Velocity * delta;
 		MoveAndCollide(motion);
-		// some comments
+		// какие-то изменения
 
 	}
 
