@@ -14,12 +14,12 @@
 size = Vector2(24, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fu1g8"]
-size = Vector2(128.5, 52.75)
+size = Vector2(128, 52.75)
 
 [sub_resource type="LabelSettings" id="LabelSettings_37vb2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gprmt"]
-size = Vector2(103, 41.5)
+size = Vector2(128, 41.5)
 
 [node name="Core" type="Node"]
 
@@ -99,7 +99,8 @@ texture = ExtResource("9_kgyrj")
 [node name="SecondCheck" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SecondCheck"]
-position = Vector2(-899, -3)
+position = Vector2(-898, -3)
 shape = SubResource("RectangleShape2D_gprmt")
 
 [connection signal="body_entered" from="FinalCheck" to="OurCar" method="_on_final_chek_body_entered"]
+[connection signal="body_entered" from="SecondCheck" to="OurCar" method="_on_second_check_body_entered"]
