@@ -3,7 +3,7 @@ using System;
 
 public partial class OurCar : CharacterBody2D
 {
-	private float Speed = 400/1.5;
+	private float Speed = 400;
 	private float AngularSpeed = (Mathf.Pi * 1.2f)/2;
 	private Label LoopLabel;
 	private Area2D FinCheck, SecCheck;
