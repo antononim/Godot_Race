@@ -45,8 +45,10 @@ public partial class OurCar : CharacterBody2D
 	private void _on_final_chek_body_entered(Node2D body) {
 		string count = LoopCounter++.ToString();
 		LoopLabel.Text = count;
-
-		OnTouchFirst = CheckOnTouch;
+		FinCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
+		SecCheck.ProcessMode = Node.ProcessModeEnum.Always;
+		//uhh
+	}
 
 	private void _on_second_check_body_entered(Node2D body) {
 		
