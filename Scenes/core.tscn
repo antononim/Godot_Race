@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://djw73ss0f687s"]
+[gd_scene load_steps=14 format=3 uid="uid://djw73ss0f687s"]
 
 [ext_resource type="Script" path="res://Scenes/OurCar.cs" id="1_s5emo"]
 [ext_resource type="Texture2D" uid="uid://besdyglo7qksq" path="res://Resource/Cars/car_green_3.png" id="2_1kdx2"]
@@ -14,15 +14,19 @@
 size = Vector2(24, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fu1g8"]
-size = Vector2(128.5, 52.75)
+size = Vector2(128, 52.75)
 
 [sub_resource type="LabelSettings" id="LabelSettings_37vb2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gprmt"]
+size = Vector2(128, 41.5)
 
 [node name="Core" type="Node"]
 
 [node name="OurCar" type="CharacterBody2D" parent="."]
 z_index = 1
 y_sort_enabled = true
+position = Vector2(1, 108)
 motion_mode = 1
 script = ExtResource("1_s5emo")
 
@@ -50,21 +54,21 @@ tile_set = ExtResource("3_53ico")
 format = 2
 layer_0/tile_data = PackedInt32Array(-262145, 393216, 17, -196609, 393216, 17, -131073, 393216, 17, -65537, 393216, 17, -1, 524288, 12, 131071, 393216, 17, 196607, 393216, 17, 262143, 393216, 17, 327679, 524288, 13, -327681, 393216, 17, -393217, 655360, 13, -393218, 393216, 16, -393219, 393216, 16, -393220, 393216, 16, -393221, 393216, 15, -327685, 393216, 17, -262149, 393216, 17, -196613, 524288, 13, -196614, 393216, 15, -131078, 524288, 13, -131079, 393216, 15, -65543, 524288, 13, -65544, 393216, 15, -8, 393216, 17, 65528, 393216, 17, 131064, 589824, 15, 131065, 393216, 16, 131066, 524288, 14, 131067, 655360, 14, 131068, 589824, 13, 65532, 655360, 11, 65531, 393216, 14, 65530, 655360, 12, 196602, 589824, 12, 196603, 458752, 15, 196604, 589824, 11, 262139, 393216, 17, 327675, 589824, 15, 327676, 393216, 16, 327677, 393216, 16, 327678, 393216, 16, 65535, 393216, 17)
 
-[node name="FinalChek" type="Area2D" parent="."]
+[node name="FinalCheck" type="Area2D" parent="."]
 position = Vector2(1, -278)
 audio_bus_override = true
 script = ExtResource("4_itrfs")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="FinalChek"]
-position = Vector2(-2.75, 335.625)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinalCheck"]
+position = Vector2(-2.5, 288)
 shape = SubResource("RectangleShape2D_fu1g8")
 
-[node name="Sprite2D" type="Sprite2D" parent="FinalChek"]
+[node name="Sprite2D" type="Sprite2D" parent="FinalCheck"]
 visible = false
 position = Vector2(0, -2)
 texture = ExtResource("5_qo6fc")
 
-[node name="engine" type="AudioStreamPlayer2D" parent="FinalChek"]
+[node name="engine" type="AudioStreamPlayer2D" parent="FinalCheck"]
 stream = ExtResource("6_lia3p")
 script = ExtResource("7_g3wtq")
 
@@ -92,4 +96,11 @@ text = "0"
 position = Vector2(-451, -283)
 texture = ExtResource("9_kgyrj")
 
-[connection signal="body_entered" from="FinalChek" to="OurCar" method="_on_final_chek_body_entered"]
+[node name="SecondCheck" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SecondCheck"]
+position = Vector2(-898, -3)
+shape = SubResource("RectangleShape2D_gprmt")
+
+[connection signal="body_entered" from="FinalCheck" to="OurCar" method="_on_final_chek_body_entered"]
+[connection signal="body_entered" from="SecondCheck" to="OurCar" method="_on_second_check_body_entered"]
