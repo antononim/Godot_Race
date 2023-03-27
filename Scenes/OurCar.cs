@@ -8,6 +8,8 @@ public partial class OurCar : CharacterBody2D
 	private Label LoopLabel;
 	private Area2D FinCheck, SecCheck;
 	private int LoopCounter = 0;
+	public bool OnTouchFirst = false;
+	public bool OnTouchSecond = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -54,4 +56,7 @@ public partial class OurCar : CharacterBody2D
 		SecCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
 	}
 
+
 }
+
+

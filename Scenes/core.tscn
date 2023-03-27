@@ -60,7 +60,7 @@ audio_bus_override = true
 script = ExtResource("4_itrfs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinalCheck"]
-position = Vector2(-3, 288)
+position = Vector2(-2.5, 288)
 shape = SubResource("RectangleShape2D_fu1g8")
 
 [node name="Sprite2D" type="Sprite2D" parent="FinalCheck"]
