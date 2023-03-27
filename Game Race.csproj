@@ -4,4 +4,13 @@
     <EnableDynamicLoading>true</EnableDynamicLoading>
     <RootNamespace>GameRace</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="GodotTools.IdeMessaging" Version="1.1.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="GodotSharp" Version="4.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Update="GodotSharpEditor" Version="4.0.1" />
+  </ItemGroup>
 </Project>

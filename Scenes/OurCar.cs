@@ -3,7 +3,7 @@ using System;
 
 public partial class OurCar : CharacterBody2D
 {
-	private float Speed = 400/2;
+	private float Speed = 400/1.5;
 	private float AngularSpeed = (Mathf.Pi * 1.2f)/2;
 	private Label LoopLabel;
 	private Area2D FinCheck, SecCheck;
@@ -22,7 +22,7 @@ public partial class OurCar : CharacterBody2D
 	public override void _Process(double Delta)
 	{
 		float delta = (float) Delta;
-
+		//comment
 		if (Input.IsActionPressed("ui_right"))
 			Rotation += AngularSpeed * delta;
 		if (Input.IsActionPressed("ui_left"))
@@ -45,7 +45,6 @@ public partial class OurCar : CharacterBody2D
 	private void _on_final_chek_body_entered(Node2D body) {
 		string count = LoopCounter++.ToString();
 		LoopLabel.Text = count;
-
 		FinCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
 		SecCheck.ProcessMode = Node.ProcessModeEnum.Always;
 		//uhh
