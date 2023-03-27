@@ -6,11 +6,14 @@ public partial class OurCar : CharacterBody2D
 	private float Speed = 400/2;
 	private float AngularSpeed = (Mathf.Pi * 1.2f)/2;
 	private Label LoopLabel;
+	private CollisionShape2D FinCheck, SecCheck;
 	private int LoopCounter = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		LoopLabel = GetNode<Label>("../StaticCam/NumCircles");
+		FinCheck = GetNode<CollisionShape2D>("../FinalCheck/CollisionShape2D");
+		SecCheck = GetNode<CollisionShape2D>("../SecondCheck/CollisionShape2D");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,14 +37,16 @@ public partial class OurCar : CharacterBody2D
 
 		var motion = Velocity * delta;
 		MoveAndCollide(motion);
-		// ну допустим
 
 	}
 
 	private void _on_final_chek_body_entered(Node2D body)
-    {
-        string count = LoopCounter++.ToString();
+	{
+		string count = LoopCounter++.ToString();
 		LoopLabel.Text = count;
-    }
+
+		FinCheck.disabled = true;
+		SecCheck.enabled = true;
+	}
 
 }
