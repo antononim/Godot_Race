@@ -14,7 +14,7 @@
 size = Vector2(24, 47)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fu1g8"]
-size = Vector2(128.5, 52.75)
+size = Vector2(87, 52.75)
 
 [sub_resource type="LabelSettings" id="LabelSettings_37vb2"]
 
@@ -60,7 +60,7 @@ audio_bus_override = true
 script = ExtResource("4_itrfs")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FinalCheck"]
-position = Vector2(-3, 288)
+position = Vector2(-2.5, 288)
 shape = SubResource("RectangleShape2D_fu1g8")
 
 [node name="Sprite2D" type="Sprite2D" parent="FinalCheck"]
@@ -103,3 +103,4 @@ position = Vector2(-899, -3)
 shape = SubResource("RectangleShape2D_gprmt")
 
 [connection signal="body_entered" from="FinalCheck" to="OurCar" method="_on_final_chek_body_entered"]
+[connection signal="hidden" from="FinalCheck" to="OurCar" method="_on_final_check_hidden"]

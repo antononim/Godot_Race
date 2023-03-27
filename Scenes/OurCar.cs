@@ -6,14 +6,16 @@ public partial class OurCar : CharacterBody2D
 	private float Speed = 400/2;
 	private float AngularSpeed = (Mathf.Pi * 1.2f)/2;
 	private Label LoopLabel;
-	private CollisionShape2D FinCheck, SecCheck;
+	private Area2D FinCheck, SecCheck;
 	private int LoopCounter = 0;
+	public bool OnTouchFirst = false;
+	public bool OnTouchSecond = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		LoopLabel = GetNode<Label>("../StaticCam/NumCircles");
-		FinCheck = GetNode<CollisionShape2D>("../FinalCheck/CollisionShape2D");
-		SecCheck = GetNode<CollisionShape2D>("../SecondCheck/CollisionShape2D");
+		FinCheck = GetNode<Area2D>("../FinalCheck");
+		SecCheck = GetNode<Area2D>("../SecondCheck");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,13 +42,18 @@ public partial class OurCar : CharacterBody2D
 
 	}
 
-	private void _on_final_chek_body_entered(Node2D body)
+	private void _on_final_chek_body_entered(Node2D body, bool CheckOnTouch)
 	{
 		string count = LoopCounter++.ToString();
 		LoopLabel.Text = count;
 
-		FinCheck.disabled = true;
-		SecCheck.enabled = true;
+		OnTouchFirst = CheckOnTouch;
+
+		//FinCheck.disabled = true;
+		//SecCheck.enabled = true;
 	}
 
+
 }
+
+
