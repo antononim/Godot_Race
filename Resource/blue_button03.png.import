@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1dp0g7idnvfj"
-path="res://.godot/imported/car_yellow_2.png-422ee354f5dcccb75913b82159ee123b.ctex"
+uid="uid://blgo33jly4ul1"
+path="res://.godot/imported/blue_button03.png-c367168d20d5512eee60efb8d553ad01.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resource/Cars/car_yellow_2.png"
-dest_files=["res://.godot/imported/car_yellow_2.png-422ee354f5dcccb75913b82159ee123b.ctex"]
+source_file="res://Resource/blue_button03.png"
+dest_files=["res://.godot/imported/blue_button03.png-c367168d20d5512eee60efb8d553ad01.ctex"]
 
 [params]
 

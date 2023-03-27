@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1dp0g7idnvfj"
-path="res://.godot/imported/car_yellow_2.png-422ee354f5dcccb75913b82159ee123b.ctex"
+uid="uid://b6dk36ugwbjet"
+path="res://.godot/imported/spritesheet_tiles2.png-39d8c7f3270482feb545b17a68ab8624.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Resource/Cars/car_yellow_2.png"
-dest_files=["res://.godot/imported/car_yellow_2.png-422ee354f5dcccb75913b82159ee123b.ctex"]
+source_file="res://Resource/Road/spritesheet_tiles2.png"
+dest_files=["res://.godot/imported/spritesheet_tiles2.png-39d8c7f3270482feb545b17a68ab8624.ctex"]
 
 [params]
 

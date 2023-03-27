@@ -1,14 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://djw73ss0f687s"]
+[gd_scene load_steps=12 format=3 uid="uid://djw73ss0f687s"]
 
 [ext_resource type="Script" path="res://Scenes/OurCar.cs" id="1_s5emo"]
-[ext_resource type="Texture2D" uid="uid://besdyglo7qksq" path="res://Resource/Cars/car_green_3.png" id="2_1kdx2"]
+[ext_resource type="Texture2D" uid="uid://bujc637oarv6y" path="res://Resource/Cars/car_green_3.png" id="2_1kdx2"]
 [ext_resource type="TileSet" uid="uid://bg4uuvmbaaf5t" path="res://Resource/Road/core.tres" id="3_53ico"]
 [ext_resource type="Script" path="res://Scenes/FinalChek.cs" id="4_itrfs"]
 [ext_resource type="Texture2D" uid="uid://c8y7awk2jsi2k" path="res://icon.svg" id="5_qo6fc"]
-[ext_resource type="AudioStream" uid="uid://3aj6unmacmnh" path="res://Resource/sounds/engine-loop-1-normalized.wav" id="6_lia3p"]
-[ext_resource type="Script" path="res://Scenes/engine.cs" id="7_g3wtq"]
+[ext_resource type="Texture2D" uid="uid://blgo33jly4ul1" path="res://Resource/blue_button03.png" id="7_bmwo5"]
 [ext_resource type="Script" path="res://Scenes/StaticCam.cs" id="8_g2lhc"]
-[ext_resource type="Texture2D" uid="uid://cno2u3gwoc6ji" path="res://Resource/interface/blue/blue_button02.png" id="9_kgyrj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65d31"]
 size = Vector2(24, 47)
@@ -68,10 +66,6 @@ visible = false
 position = Vector2(0, -2)
 texture = ExtResource("5_qo6fc")
 
-[node name="engine" type="AudioStreamPlayer2D" parent="FinalCheck"]
-stream = ExtResource("6_lia3p")
-script = ExtResource("7_g3wtq")
-
 [node name="StaticCam" type="Camera2D" parent="."]
 script = ExtResource("8_g2lhc")
 
@@ -93,8 +87,8 @@ offset_bottom = -272.0
 text = "0"
 
 [node name="BlueButton02" type="Sprite2D" parent="StaticCam"]
-position = Vector2(-451, -283)
-texture = ExtResource("9_kgyrj")
+position = Vector2(-456, -285)
+texture = ExtResource("7_bmwo5")
 
 [node name="SecondCheck" type="Area2D" parent="."]
 
