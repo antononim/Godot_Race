@@ -48,6 +48,7 @@ public partial class OurCar : CharacterBody2D
 
 		FinCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
 		SecCheck.ProcessMode = Node.ProcessModeEnum.Always;
+		//uhh
 	}
 
 	private void _on_second_check_body_entered(Node2D body) {
