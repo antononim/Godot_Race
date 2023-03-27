@@ -1,0 +1,95 @@
+[gd_scene load_steps=13 format=3 uid="uid://djw73ss0f687s"]
+
+[ext_resource type="Script" path="res://Scenes/OurCar.cs" id="1_s5emo"]
+[ext_resource type="Texture2D" uid="uid://besdyglo7qksq" path="res://Resource/Cars/car_green_3.png" id="2_1kdx2"]
+[ext_resource type="TileSet" uid="uid://bg4uuvmbaaf5t" path="res://Resource/Road/core.tres" id="3_53ico"]
+[ext_resource type="Script" path="res://Scenes/FinalChek.cs" id="4_itrfs"]
+[ext_resource type="Texture2D" uid="uid://c8y7awk2jsi2k" path="res://icon.svg" id="5_qo6fc"]
+[ext_resource type="AudioStream" uid="uid://3aj6unmacmnh" path="res://Resource/sounds/engine-loop-1-normalized.wav" id="6_lia3p"]
+[ext_resource type="Script" path="res://Scenes/engine.cs" id="7_g3wtq"]
+[ext_resource type="Script" path="res://Scenes/StaticCam.cs" id="8_g2lhc"]
+[ext_resource type="Texture2D" uid="uid://cno2u3gwoc6ji" path="res://Resource/interface/blue/blue_button02.png" id="9_kgyrj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_65d31"]
+size = Vector2(24, 47)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fu1g8"]
+size = Vector2(128.5, 52.75)
+
+[sub_resource type="LabelSettings" id="LabelSettings_37vb2"]
+
+[node name="Core" type="Node"]
+
+[node name="OurCar" type="CharacterBody2D" parent="."]
+z_index = 1
+y_sort_enabled = true
+motion_mode = 1
+script = ExtResource("1_s5emo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OurCar"]
+light_mask = 7
+visibility_layer = 7
+z_index = 1
+y_sort_enabled = true
+position = Vector2(2.27374e-13, 5.68434e-14)
+shape = SubResource("RectangleShape2D_65d31")
+debug_color = Color(0, 0.6, 0.701961, 0.419608)
+
+[node name="Sprite2D" type="Sprite2D" parent="OurCar"]
+light_mask = 7
+visibility_layer = 7
+z_index = 1
+y_sort_enabled = true
+position = Vector2(3.8147e-06, 9.53674e-07)
+scale = Vector2(0.385714, 0.380331)
+texture = ExtResource("2_1kdx2")
+
+[node name="TileMap" type="TileMap" parent="."]
+position = Vector2(62, 75)
+tile_set = ExtResource("3_53ico")
+format = 2
+layer_0/tile_data = PackedInt32Array(-262145, 393216, 17, -196609, 393216, 17, -131073, 393216, 17, -65537, 393216, 17, -1, 524288, 12, 131071, 393216, 17, 196607, 393216, 17, 262143, 393216, 17, 327679, 524288, 13, -327681, 393216, 17, -393217, 655360, 13, -393218, 393216, 16, -393219, 393216, 16, -393220, 393216, 16, -393221, 393216, 15, -327685, 393216, 17, -262149, 393216, 17, -196613, 524288, 13, -196614, 393216, 15, -131078, 524288, 13, -131079, 393216, 15, -65543, 524288, 13, -65544, 393216, 15, -8, 393216, 17, 65528, 393216, 17, 131064, 589824, 15, 131065, 393216, 16, 131066, 524288, 14, 131067, 655360, 14, 131068, 589824, 13, 65532, 655360, 11, 65531, 393216, 14, 65530, 655360, 12, 196602, 589824, 12, 196603, 458752, 15, 196604, 589824, 11, 262139, 393216, 17, 327675, 589824, 15, 327676, 393216, 16, 327677, 393216, 16, 327678, 393216, 16, 65535, 393216, 17)
+
+[node name="FinalChek" type="Area2D" parent="."]
+position = Vector2(1, -278)
+audio_bus_override = true
+script = ExtResource("4_itrfs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinalChek"]
+position = Vector2(-2.75, 335.625)
+shape = SubResource("RectangleShape2D_fu1g8")
+
+[node name="Sprite2D" type="Sprite2D" parent="FinalChek"]
+visible = false
+position = Vector2(0, -2)
+texture = ExtResource("5_qo6fc")
+
+[node name="engine" type="AudioStreamPlayer2D" parent="FinalChek"]
+stream = ExtResource("6_lia3p")
+script = ExtResource("7_g3wtq")
+
+[node name="StaticCam" type="Camera2D" parent="."]
+script = ExtResource("8_g2lhc")
+
+[node name="TextNumCircles" type="Label" parent="StaticCam"]
+z_index = 2
+offset_left = -535.0
+offset_top = -299.0
+offset_right = -351.0
+offset_bottom = -273.0
+text = "Пройдено кругов:"
+label_settings = SubResource("LabelSettings_37vb2")
+
+[node name="NumCircles" type="Label" parent="StaticCam"]
+z_index = 2
+offset_left = -387.0
+offset_top = -298.0
+offset_right = -347.0
+offset_bottom = -272.0
+text = "0"
+
+[node name="BlueButton02" type="Sprite2D" parent="StaticCam"]
+position = Vector2(-451, -283)
+texture = ExtResource("9_kgyrj")
+
+[connection signal="body_entered" from="FinalChek" to="OurCar" method="_on_final_chek_body_entered"]

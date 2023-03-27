@@ -1,0 +1,14 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://di6c0k7hpvd81"]
+
+[sub_resource type="AudioEffectPhaser" id="AudioEffectPhaser_drb7g"]
+resource_name = "Phaser"
+
+[resource]
+bus/1/name = &"New Bus"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -37.0789
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectPhaser_drb7g")
+bus/1/effect/0/enabled = true
