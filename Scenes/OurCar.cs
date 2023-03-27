@@ -14,8 +14,8 @@ public partial class OurCar : CharacterBody2D
 	public override void _Ready()
 	{
 		LoopLabel = GetNode<Label>("../StaticCam/NumCircles");
-		FinCheck = GetNode<Area2D>("../FinalCheck");
-		SecCheck = GetNode<Area2D>("../SecondCheck");
+		FinCheck = GetNode<Area2D>("/Core/FinalCheck");
+		SecCheck = GetNode<Area2D>("/Core/SecondCheck");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,15 +42,16 @@ public partial class OurCar : CharacterBody2D
 
 	}
 
-	private void _on_final_chek_body_entered(Node2D body, bool CheckOnTouch)
-	{
+	private void _on_final_chek_body_entered(Node2D body) {
 		string count = LoopCounter++.ToString();
 		LoopLabel.Text = count;
 
-		FinCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
+		OnTouchFirst = CheckOnTouch;
 
-		//FinCheck.disabled = true;
-		//SecCheck.enabled = true;
+	private void _on_second_check_body_entered(Node2D body) {
+		
+		FinCheck.ProcessMode = Node.ProcessModeEnum.Always;
+		SecCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
 	}
 
 
