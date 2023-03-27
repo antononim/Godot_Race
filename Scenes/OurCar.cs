@@ -3,11 +3,13 @@ using System;
 
 public partial class OurCar : CharacterBody2D
 {
-	private float Speed = 350;
-	private float AngularSpeed = (Mathf.Pi * 1.5f)/2;
+	private float Speed = 400/1.5;
+	private float AngularSpeed = (Mathf.Pi * 1.2f)/2;
 	private Label LoopLabel;
 	private Area2D FinCheck, SecCheck;
 	private int LoopCounter = 0;
+	public bool OnTouchFirst = false;
+	public bool OnTouchSecond = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -40,14 +42,11 @@ public partial class OurCar : CharacterBody2D
 
 	}
 
-	private void _on_final_chek_body_entered(Node2D body)
-	{
+	private void _on_final_chek_body_entered(Node2D body) {
 		string count = LoopCounter++.ToString();
 		LoopLabel.Text = count;
 
-		FinCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
-		SecCheck.ProcessMode = Node.ProcessModeEnum.Always;
-	}
+		OnTouchFirst = CheckOnTouch;
 
 	private void _on_second_check_body_entered(Node2D body) {
 		
