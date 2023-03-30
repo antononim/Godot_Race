@@ -4,12 +4,13 @@ using System;
 public partial class OurCar : CharacterBody2D
 {
 	private float Speed = 400;
-	private float AngularSpeed = (Mathf.Pi * 1.2f)/2;
+	private float AngularSpeed = Mathf.Pi * 1.6f;
 	private Label LoopLabel;
 	private Area2D FinCheck, SecCheck;
 	private int LoopCounter = 0;
 	public bool OnTouchFirst = false;
 	public bool OnTouchSecond = false;
+	private Vector2 Acceleration;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -28,15 +29,26 @@ public partial class OurCar : CharacterBody2D
 		if (Input.IsActionPressed("ui_left"))
 			Rotation -= AngularSpeed * delta;
 
-		Velocity = Vector2.Zero;
+		//Velocity = Vector2.Zero;
+		Velocity *= 0.95f;
 
 		if (Input.IsActionPressed("ui_up")){
-			Velocity = Vector2.Up.Rotated(Rotation) * Speed;
+			// So SPEED is maximum velocity. Kinda. For now.
+			// So I will take max, subtract... something.
+			// Max = Old+New. Old is Velocity.
+			// Acceleration = Max - CurrentVelocity. IG...
+
+			Acceleration = Vector2.Up.Rotated(Rotation) * Speed/7; //New Velocity
+
+			// Velocity += Vector2.Up.Rotated(Rotation) * Speed;
+			// Velocity = Vector2.Up.Rotated(Rotation) * Speed;
 		}
 		if (Input.IsActionPressed("ui_down")){
-			Velocity = Vector2.Up.Rotated(Rotation) * (-1*(Speed/2));
+			// Velocity += Vector2.Up.Rotated(Rotation) * -1 * Speed/2;
+			Velocity = Vector2.Up.Rotated(Rotation) * -1 * (Speed/2);
 		}
-
+		Velocity += Acceleration;
+		Acceleration = Vector2.Zero;
 		var motion = Velocity * delta;
 		MoveAndCollide(motion);
 
