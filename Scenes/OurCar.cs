@@ -11,6 +11,13 @@ public partial class OurCar : CharacterBody2D
 	public bool OnTouchFirst = false;
 	public bool OnTouchSecond = false;
 	private Vector2 Acceleration;
+
+	public override void _Draw(){
+		Vector2 to = Velocity;
+		
+		DrawLine(Vector2.Zero, Velocity, Colors.Green, 2.0f);
+	}
+
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
@@ -52,6 +59,7 @@ public partial class OurCar : CharacterBody2D
 		var motion = Velocity * delta;
 		MoveAndCollide(motion);
 
+		QueueRedraw();
 	}
 
 	private void _on_final_chek_body_entered(Node2D body) {
