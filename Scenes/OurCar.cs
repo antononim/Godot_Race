@@ -3,27 +3,33 @@ using System;
 
 public partial class OurCar : CharacterBody2D
 {
-	private float Speed = 400;
+	private float Speed = 400/2;
 	private float AngularSpeed = Mathf.Pi * 1.6f;
 	private Label LoopLabel;
 	private Area2D FinCheck, SecCheck;
+	private CollisionShape2D FinCol, SecCol;
 	private int LoopCounter = 0;
-	public bool OnTouchFirst = false;
-	public bool OnTouchSecond = false;
+	public bool FinTouched = false;
 	private Vector2 Acceleration;
 
 	public override void _Draw(){
 		Vector2 to = Velocity;
-		
-		DrawLine(Vector2.Zero, Velocity, Colors.Green, 2.0f);
+		Vector2 vect = Velocity.Rotated(Rotation*-1); //Negate the Car's rotation
+		vect = vect/4f; // Make it smaller so it fits on the screen
+		DrawLine(Vector2.Zero, vect, Colors.Brown, 4.0f);
 	}
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		LoopLabel = GetNode<Label>("../StaticCam/NumCircles");
-		FinCheck = GetNode<Area2D>("/Core/FinalCheck");
-		SecCheck = GetNode<Area2D>("/Core/SecondCheck");
+		FinCheck = GetNode<Area2D>("../FinalCheck");
+		SecCheck = GetNode<Area2D>("../SecondCheck");
+		FinCol = GetNode<CollisionShape2D>("../FinalCheck/FinCol");
+		SecCol = GetNode<CollisionShape2D>("../SecondCheck/SecCol");
+
+		FinCheck.DisableMode = DisableModeEnum.Remove;
+		SecCheck.DisableMode = DisableModeEnum.Remove;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -52,28 +58,32 @@ public partial class OurCar : CharacterBody2D
 		}
 		if (Input.IsActionPressed("ui_down")){
 			// Velocity += Vector2.Up.Rotated(Rotation) * -1 * Speed/2;
-			Velocity = Vector2.Up.Rotated(Rotation) * -1 * (Speed/2);
+			// Velocity = Vector2.Up.Rotated(Rotation) * -1 * (Speed/2);
+			Acceleration = Vector2.Up.Rotated(Rotation) * -1 * Speed/7/2;
 		}
 		Velocity += Acceleration;
 		Acceleration = Vector2.Zero;
 		var motion = Velocity * delta;
-		MoveAndCollide(motion);
+		// MoveAndCollide(motion);
+		MoveAndSlide();
 
 		QueueRedraw();
 	}
 
+	private Node.ProcessModeEnum disable = Node.ProcessModeEnum.Disabled;
+	private Node.ProcessModeEnum enable = Node.ProcessModeEnum.Always;
 	private void _on_final_chek_body_entered(Node2D body) {
-		string count = LoopCounter++.ToString();
-		LoopLabel.Text = count;
-		FinCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
-		SecCheck.ProcessMode = Node.ProcessModeEnum.Always;
-		//uhh
+		if (!FinTouched){
+			string count = LoopCounter++.ToString();
+			LoopLabel.Text = count;
+			FinTouched = !FinTouched; //sets to true
+		}
 	}
 
 	private void _on_second_check_body_entered(Node2D body) {
-		
-		FinCheck.ProcessMode = Node.ProcessModeEnum.Always;
-		SecCheck.ProcessMode = Node.ProcessModeEnum.Disabled;
+		if (FinTouched){
+			FinTouched = !FinTouched; //sets to false
+		}
 	}
 
 
