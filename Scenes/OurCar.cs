@@ -46,13 +46,15 @@ public partial class OurCar : CharacterBody2D
 
 		if (Input.IsActionPressed("ui_up")){
 			Acceleration = Vector2.Up.Rotated(Rotation); // Speed 
-			Acceleration *= Speed * 0.15f; // Set speed
+			Acceleration *= Speed * 0.28f; // Set speed
 		}
+		
 		if (Input.IsActionPressed("ui_down")){
 			Acceleration = Vector2.Up.Rotated(Rotation); // The "Forward" vector
-			Acceleration *= Speed * 0.15f; // Set the car's speed
+			Acceleration *= Speed * 0.28f; // Set the car's speed
 			Acceleration *= -1 * 0.5f; // Move slower (0.5) and backwards (-1)
 		}
+
 		// Appling our acceleration
 		Velocity += Acceleration;
 		var motion = Velocity * delta;
