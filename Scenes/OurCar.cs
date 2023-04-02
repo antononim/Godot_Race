@@ -3,8 +3,9 @@ using System;
 
 public partial class OurCar : CharacterBody2D
 {
-	private float Speed = 400/2;
+	private float Speed = 200;
 	private float AngularSpeed = Mathf.Pi * 1.6f;
+	private float Nitro = 100f;
 	private Label LoopLabel;
 	private Area2D FinCheck, SecCheck;
 	private CollisionShape2D FinCol, SecCol;
@@ -14,15 +15,14 @@ public partial class OurCar : CharacterBody2D
 
 	public override void _Draw(){
 		Vector2 to = Velocity;
-		Vector2 vect = Velocity.Rotated(Rotation*-1); //Negate the Car's rotation
+		Vector2 vect = Velocity.Rotated(-Rotation); //Negate the Car's rotation
 		vect = vect/4f; // Make it smaller so it fits on the screen
 		DrawLine(Vector2.Zero, vect, Colors.Brown, 4.0f);
 	}
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		LoopLabel = GetNode<Label>("../StaticCam/NumCircles");
+		LoopLabel = GetNode<Label>("../StaticCam/Loops/NumCircles");
 		FinCheck = GetNode<Area2D>("../FinalCheck");
 		SecCheck = GetNode<Area2D>("../SecondCheck");
 		FinCol = GetNode<CollisionShape2D>("../FinalCheck/FinCol");
@@ -32,46 +32,41 @@ public partial class OurCar : CharacterBody2D
 		SecCheck.DisableMode = DisableModeEnum.Remove;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double Delta)
 	{
 		float delta = (float) Delta;
-		//comment
+		
 		if (Input.IsActionPressed("ui_right"))
 			Rotation += AngularSpeed * delta;
 		if (Input.IsActionPressed("ui_left"))
 			Rotation -= AngularSpeed * delta;
 
-		//Velocity = Vector2.Zero;
-		Velocity *= 0.95f;
+		Velocity *= 0.85f;
+		Acceleration = Vector2.Zero;
 
 		if (Input.IsActionPressed("ui_up")){
-			// So SPEED is maximum velocity. Kinda. For now.
-			// So I will take max, subtract... something.
-			// Max = Old+New. Old is Velocity.
-			// Acceleration = Max - CurrentVelocity. IG...
-
-			Acceleration = Vector2.Up.Rotated(Rotation) * Speed/7; //New Velocity
-
-			// Velocity += Vector2.Up.Rotated(Rotation) * Speed;
-			// Velocity = Vector2.Up.Rotated(Rotation) * Speed;
+			Acceleration = Vector2.Up.Rotated(Rotation); // Speed 
+			Acceleration *= Speed * 0.15f; // Set speed
 		}
 		if (Input.IsActionPressed("ui_down")){
-			// Velocity += Vector2.Up.Rotated(Rotation) * -1 * Speed/2;
-			// Velocity = Vector2.Up.Rotated(Rotation) * -1 * (Speed/2);
-			Acceleration = Vector2.Up.Rotated(Rotation) * -1 * Speed/7/2;
+			Acceleration = Vector2.Up.Rotated(Rotation); // The "Forward" vector
+			Acceleration *= Speed * 0.15f; // Set the car's speed
+			Acceleration *= -1 * 0.5f; // Move slower (0.5) and backwards (-1)
 		}
+		// Appling our acceleration
 		Velocity += Acceleration;
-		Acceleration = Vector2.Zero;
 		var motion = Velocity * delta;
-		// MoveAndCollide(motion);
 		MoveAndSlide();
 
 		QueueRedraw();
 	}
 
-	private Node.ProcessModeEnum disable = Node.ProcessModeEnum.Disabled;
-	private Node.ProcessModeEnum enable = Node.ProcessModeEnum.Always;
+	public override void _UnhandledInput(InputEvent ev){
+		if (Input.IsKeyPressed(Key.Escape)){
+			GetTree().ChangeSceneToFile("res://Scenes/menu.tscn");
+		}
+	}
+
 	private void _on_final_chek_body_entered(Node2D body) {
 		if (!FinTouched){
 			string count = LoopCounter++.ToString();

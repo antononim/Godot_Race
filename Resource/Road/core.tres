@@ -1,6 +1,11 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://bg4uuvmbaaf5t"]
+[gd_resource type="TileSet" load_steps=4 format=3 uid="uid://bg4uuvmbaaf5t"]
 
 [ext_resource type="Texture2D" uid="uid://bka6fkxawvhw7" path="res://Resource/Road/spritesheet_tiles.png" id="1_sg3us"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d3sjl"]
+friction = 10.8
+rough = true
+bounce = 2.45
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_quk37"]
 texture = ExtResource("1_sg3us")
@@ -1080,6 +1085,7 @@ texture_region_size = Vector2i(128, 128)
 [resource]
 tile_size = Vector2i(128, 128)
 physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_d3sjl")
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "GreenRoad"
 terrain_set_0/terrain_0/color = Color(0.133333, 0.443137, 0.372549, 1)
